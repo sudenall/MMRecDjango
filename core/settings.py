@@ -46,7 +46,6 @@ INSTALLED_APPS = [
 
     'accounts',
     'customdash',
-    'dpdmiddleware',
 
 ]
 
@@ -60,8 +59,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_plotly_dash.middleware.BaseMiddleware',
     'django_plotly_dash.middleware.ExternalRedirectionMiddleware',
-    'dpdmiddleware.middleware.BaseMiddleware',
-
 ]
 
 STATICFILES_FINDERS = [

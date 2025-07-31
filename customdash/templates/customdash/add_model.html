@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">🚀 Add Your Own Model</h2>
+
+    <div class="row">
+        <div class="col-md-3 mb-3">
+            <div class="d-grid gap-3">
+                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#uploadDatasetModal" id="openDatasetModal">
+                    📂 Upload Dataset
+                </button>
+                <button class="btn btn-outline-success">📦 Upload Algorithm</button>
+                <button class="btn btn-outline-dark">📈 Create Graph</button>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <div class="border p-4 text-center shadow-sm" style="min-height: 250px;">
+                <h5 class="text-muted">DASH GRAPHS WILL APPEAR IN HERE</h5>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3 d-flex flex-column gap-3">
+            <button class="btn btn-outline-secondary">📝 Make Comment or Add Notes</button>
+            <button class="btn btn-primary">✅ Register Graph</button>
+        </div>
+    </div>
+
+    <!-- Başarı alerti -->
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} text-center mt-3" role="alert">
+            {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    <div class="text-center mt-4">
+        <a href="{% url 'home' %}" class="btn btn-secondary">⬅️ Back to Main Menu</a>
+    </div>
+</div>
+
+<!-- Upload Dataset Modal -->
+<div class="modal fade" id="uploadDatasetModal" tabindex="-1" aria-labelledby="uploadDatasetModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="datasetUploadForm" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="modal-header">
+          <h5 class="modal-title" id="uploadDatasetModalLabel">📂 Upload Dataset</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          {{ form.as_p }}
+          <div id="formError" class="text-danger small mt-2"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Load</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- AJAX -->
+<script>
+document.getElementById("datasetUploadForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    
+    fetch("{% url 'upload_dataset' %}", {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": formData.get("csrfmiddlewaretoken")
+        },
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) return response.json();
+        throw new Error("Unsuccessful load");
+    })
+    .then(data => {
+        if (data.success) {
+            // Başarı mesajını göstermek için sayfayı yenile
+            location.reload();
+        } else {
+            document.getElementById("formError").innerText = data.error || "Invalid file.";
+        }
+    })
+    .catch(err => {
+        document.getElementById("formError").innerText = err.message;
+    });
+});
+</script>
+{% endblock %}

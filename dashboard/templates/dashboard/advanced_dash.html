@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load plotly_dash %}
+
+{% block content %}
+  <h2 class="text-center mb-4">💡 Advanced Dashboard</h2>
+
+  <style>
+    iframe {
+        width: 100% !important;
+        height: 850px !important;
+        border: none;
+    }
+  </style>
+
+  <div class="border rounded shadow p-4 bg-white">
+      {% plotly_app name="AdvancedDashApp"  ratio=0.5 %}
+  </div>
+
+  <div class="mt-4 text-center">
+    <a href="{% url 'home' %}" class="btn btn-outline-secondary">⬅️ Back to Main Menu</a>
+
+    <div class="dropdown d-inline-block ms-3">
+        <button class="btn btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown">
+            Switch Graph
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'dash-view' %}">📈 Basic Graphs</a></li>
+            <li><a class="dropdown-item" href="{% url 'advanced-dash-view' %}">📊 Advanced Graphs</a></li>
+        </ul>
+    </div>
+  </div>
+
+{% endblock %}

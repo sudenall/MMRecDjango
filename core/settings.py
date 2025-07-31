@@ -156,6 +156,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+PLOTLY_COMPONENTS = [
+    'dash.dcc',
+    'dash.html',
+    'dash.dash_table',
+    'dpd_static_support',
+]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

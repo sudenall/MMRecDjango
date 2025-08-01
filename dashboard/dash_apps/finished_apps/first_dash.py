@@ -17,7 +17,7 @@ fig.update_layout(
     width=1000  
 )
 # for starting the app
-app = DjangoDash('FirstDashApp', serves_locally= False)
+app = DjangoDash('FirstDashApp', serve_locally= False)
 
 app.layout = html.Div(
     style={'width': '100%', 'height': '100%', 'display': 'flex', 'flexDirection': 'column', 'alignItems': 'center'},

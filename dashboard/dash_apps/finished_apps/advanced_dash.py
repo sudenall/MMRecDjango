@@ -5,9 +5,9 @@ from dash.dependencies import Input, Output
 import pandas as pd
 import os
 
-app = DjangoDash("AdvancedDashApp")
+app = DjangoDash("AdvancedDashApp", serve_locally= False, assets_ignore='.*')
 
-mapbox_access_token = "pk.eyJ1IjoicGxvdGx5bWFwYm94IiwiYSI6ImNrOWJqb2F4djBnMjEzbG50amg0dnJieG4ifQ.Zme1-Uzoi75IaFbieBDl3A"
+mapbox_access_token = "pk.eyJ1IjoicGxvdGx5bWFwYm94IiwiYSI6ImNrOWJqb2F4djBnMjEzbG50amg0dnJieG4ifQ.Zme1-Uzoi75IaFbieBDl3A" #not allowed
 
 state_map = {
     "NY": "New York",

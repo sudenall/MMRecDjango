@@ -5,7 +5,8 @@ from dash.dependencies import Input, Output
 import pandas as pd
 import os
 
-app = DjangoDash("AdvancedDashApp", serve_locally= False, assets_ignore='.*')
+app = DjangoDash("AdvancedDashApp", serve_locally= False)
+
 
 mapbox_access_token = "pk.eyJ1IjoicGxvdGx5bWFwYm94IiwiYSI6ImNrOWJqb2F4djBnMjEzbG50amg0dnJieG4ifQ.Zme1-Uzoi75IaFbieBDl3A" #not allowed
 
